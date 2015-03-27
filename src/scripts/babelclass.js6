@@ -1,0 +1,24 @@
+// NOTE : 拡張子.js6は中間ファイルである.js(ES5 JavaScript)との差別化を計る為に
+//        勝手に付けた拡張子であり、標準ではありません。
+
+import React from 'react'
+
+export var BabelClass = React.createClass({
+
+  render: function () {
+    var items = [
+      "suchi",
+      "tempura",
+      "fujiyama"
+    ]
+
+    return (
+      <div>
+        <h1>BabelClass from Babel(ES6)</h1>
+        <ul>
+          {items.map(function(x) { return <li>{x}</li>; })}
+        </ul>
+      </div>
+    )
+  }
+})
