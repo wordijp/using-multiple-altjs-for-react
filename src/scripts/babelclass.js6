@@ -14,7 +14,7 @@ export var BabelClass = React.createClass({
 
     return (
       <div>
-        <h1>BabelClass from Babel(ES6)</h1>
+        <h1>{this.props.title}</h1>
         <ul>
           {items.map(function(x) { return <li>{x}</li>; })}
         </ul>

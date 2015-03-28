@@ -7,15 +7,17 @@ source      = require 'vinyl-source-stream'
 buffer      = require 'vinyl-buffer'
 del         = require 'del'
 globule     = require 'globule'
+header      = require 'gulp-header'
 
 # 各トランスパイラ
 ts          = require 'gulp-typescript'
-cjsx        = require 'gulp-coffee-react' # ReactをCoffeeScriptで書く
-babel       = require 'gulp-babel'        # ES6のJSビルド用(Reactは標準サポート)
+cjsx        = require 'gulp-coffee-react' # jsx構文を使えるCoffeeScript
+babel       = require 'gulp-babel'        # ES6構文をES5構文へ変換する、Reactのjsx構文も標準サポート
+reactJade   = require 'gulp-react-jade'   # react-jadeテンプレートをJSコードへ変換する
 
 errorHandler = (err) -> console.log(err.toString())
 
-gulp.task 'build:lib', ['build:ts', 'build:cjsx', 'build:babel', 'build:html']
+gulp.task 'build:lib', ['build:ts', 'build:cjsx', 'build:babel', 'build:react-jade', 'build:html']
 
 ts_proj = ts.createProject({
   target: "ES6"
@@ -52,6 +54,25 @@ gulp.task 'build:babel', () ->
       return # 何も返さない
     ))
     .pipe(gulp.dest 'lib')
+    
+gulp.task 'build:react-jade', () ->
+  gulp.src('src/**/*.jade')
+    .pipe(plumber(
+      errorHandler: errorHandler
+    ))
+    .pipe(reactJade())
+    # Browserifyでbundleしても動くように必要なコードを追加する
+    .pipe(header(
+      "var React = require('react');\n" +
+      "module.exports = "
+    ))
+    .pipe(rename((path) ->
+      # gulp-react-jadeで付けられた"-tmpl"を取り除く
+      # XXX : 決め打ちなのであまりよろしくない
+      path.basename = path.basename.replace(/-tmpl$/, '')
+      return
+    ))
+    .pipe(gulp.dest 'lib')
 
 gulp.task 'build:html', () ->
   gulp.src('src/**/*.html')
@@ -64,7 +85,7 @@ gulp.task 'browserify', () ->
   
   b = browserify(args)
   # ソースを追加
-  for x in globule.find('./lib/**/*.js')
+  for x in globule.find(['./lib/**/*.js'])
     b.add(x)
     b.require(x)
   # bundle

@@ -2,32 +2,22 @@ React = require('react')
 
 TSClass = require('./tsclass').TSClass
 BabelClass = require('./babelclass').BabelClass
-
-CoffeeReactClass = React.createClass(
-  render: () ->
-    items = [
-      "item1"
-      "item2"
-      "item3"
-    ]
-
-    <div>
-      <h1>CoffeeReactClass from coffee-react</h1>
-      <ul>
-        {items.map((x) -> <li>{x}</li>)}
-      </ul>
-    </div>
-)
-
+BabelTmplClass = require('./babeltmplclass').BabelTmplClass
+CoffeeReactClass = require('./coffeereactclass').CoffeeReactClass
+CoffeeReactMixinClass = require('./coffeereactmixinclass').CoffeeReactMixinClass
 
 App = React.createClass(
   render: () ->
     <div>
-      <CoffeeReactClass />
+      <CoffeeReactClass title="coffee-react" />
       <hr />
-      <TSClass />
+      <CoffeeReactMixinClass title="coffee-react" />
       <hr />
-      <BabelClass />
+      <TSClass title="TypeScript" />
+      <hr />
+      <BabelClass title="Babel" />
+      <hr />
+      <BabelTmplClass title="Babel" />
     </div>
 )
 

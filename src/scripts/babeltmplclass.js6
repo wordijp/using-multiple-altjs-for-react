@@ -1,0 +1,21 @@
+// NOTE : 拡張子.js6は中間ファイルである.js(ES5 JavaScript)との差別化を計る為に
+//        勝手に付けた拡張子であり、標準ではありません。
+
+import React from 'react'
+import tmpl from './test-template'
+
+export var BabelTmplClass = React.createClass({
+
+  render: function () {
+    var items = [
+      "tendon",
+      "katudon",
+      "puteranodon"
+    ]
+
+    return tmpl({
+      title: this.props.title + " (using jade template file)",
+      items: items
+    });
+  }
+})
