@@ -11,9 +11,9 @@ header      = require 'gulp-header'
 
 # 各トランスパイラ
 ts          = require 'gulp-typescript'
-cjsx        = require 'gulp-coffee-react' # jsx構文を使えるCoffeeScript
-babel       = require 'gulp-babel'        # ES6構文をES5構文へ変換する、Reactのjsx構文も標準サポート
-reactJade   = require 'gulp-react-jade'   # react-jadeテンプレートをJSコードへ変換する
+cjsx        = require 'gulp-coffee-react'                # jsx構文を使えるCoffeeScript
+babel       = require 'gulp-babel'                       # ES6構文をES5構文へ変換する、Reactのjsx構文も標準サポート
+reactJade   = require './scripts/forked-gulp-react-jade' # react-jadeテンプレートをJSコードへ変換する
 
 errorHandler = (err) -> console.log(err.toString())
 
@@ -90,7 +90,6 @@ gulp.task 'browserify', () ->
     b.require(x)
   # bundle
   b
-    .transform("react-jade")
     .bundle()
     .on('error', errorHandler)
     .pipe(source 'bundle.js')

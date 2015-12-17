@@ -1,6 +1,6 @@
 React = require('react')
 
-TSClass = require('./tsclass').TSClass
+TSTmplClass = require('./tstmplclass').TSTmplClass
 BabelClass = require('./babelclass').BabelClass
 BabelTmplClass = require('./babeltmplclass').BabelTmplClass
 CoffeeReactClass = require('./coffeereactclass').CoffeeReactClass
@@ -13,7 +13,7 @@ App = React.createClass(
       <hr />
       <CoffeeReactMixinClass title="coffee-react" />
       <hr />
-      <TSClass title="TypeScript" />
+      <TSTmplClass title="TypeScript" />
       <hr />
       <BabelClass title="Babel" />
       <hr />
