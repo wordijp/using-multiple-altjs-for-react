@@ -16,7 +16,7 @@ export var BabelClass = React.createClass({
       <div>
         <h1>{this.props.title}</h1>
         <ul>
-          {items.map(function(x) { return <li>{x}</li>; })}
+          {items.map(function(x, i) { return <li key={i}>{x}</li>; })}
         </ul>
       </div>
     )

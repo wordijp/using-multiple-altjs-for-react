@@ -11,7 +11,7 @@ CoffeeReactClass = React.createClass(
     <div>
       <h1>{this.props.title}</h1>
       <ul>
-        {items.map((x) -> <li>{x}</li>)}
+        {items.map((x, i) -> <li key={i}>{x}</li>)}
       </ul>
     </div>
 )

@@ -6,7 +6,7 @@ Mixin =
     <div>
       <h1>{this.state.title}</h1>
       <ul>
-        {this.state.items.map((x) -> <li>{x}</li>)}
+        {this.state.items.map((x, i) -> <li key={i}>{x}</li>)}
       </ul>
     </div>
 

@@ -1,4 +1,5 @@
 React = require('react')
+ReactDOM = require('react-dom')
 
 TSTmplClass = require('./tstmplclass').TSTmplClass
 BabelClass = require('./babelclass').BabelClass
@@ -21,7 +22,7 @@ App = React.createClass(
     </div>
 )
 
-React.render(
+ReactDOM.render(
   <App />,
   document.getElementById("app-container")
 )
